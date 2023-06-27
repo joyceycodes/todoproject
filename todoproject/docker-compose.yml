@@ -1,0 +1,28 @@
+version: "3.9"
+services:
+  web:
+    build: .
+    ports:
+      - "8000:8000"
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/code  
+  db:
+      image: postgres:13
+      volumes:
+        - postgres_data:/var/lib/postgresql/data/
+      environment:
+        - "POSTGRES_HOST_AUTH_METHOD=trust"
+  pgadmin:
+      image: dpage/pgadmin4
+      container_name: demo-pgadmin #you can change this
+      depends_on:
+        - db
+      ports:
+        - "5051:80"
+      environment:
+        PGADMIN_DEFAULT_EMAIL: pgadmin4@pgadmin.org
+        PGADMIN_DEFAULT_PASSWORD: root
+      restart: always
+volumes:
+  postgres_data:
