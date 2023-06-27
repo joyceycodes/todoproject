@@ -20,7 +20,19 @@
                         <h1 class="display-5 text-info"><i class="fas fa-check-double"></i>Todos</h1>
                     </div>
                     <div class="card-body">
-
+                        <form action="{% url 'insert_todo_item' %}" method="post" autocomplete="off">
+                            {% csrf_token %}
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="content">
+                                <div class="input-group-append text-info">
+                                    <span class="input-group-text bg-white py-0">
+                                        <button type="submit" class="btn btn-sm text-info">
+                                            <i class="fa fa-plus-circle fa-lg"></i>
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
